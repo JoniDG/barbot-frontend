@@ -1,6 +1,7 @@
-import { Home } from "./views/Home";
+import { AppRoutes } from "./routes/AppRoutes";
 
 function App() {
+
   return (
     
     <div className="App">
@@ -14,9 +15,11 @@ function App() {
         href="https://fonts.googleapis.com/icon?family=Material+Icons"
       />
       </header>
-      <Home />
+      <AppRoutes/>
     </div>
   );
 }
+
+
 
 export default App;

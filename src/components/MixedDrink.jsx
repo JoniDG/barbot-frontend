@@ -12,7 +12,7 @@ export const MixedDrink = ({image,name,drinks}) => {
 	})
 		
 	return (
-		<ListItem alignItems="flex-start" divider='true'>
+		<ListItem alignItems="flex-start" divider= {true}>
 			<ListItemButton onClick={() => {alert(`Preparando ${name}`);}}>
 				<ListItemAvatar>
 					<Avatar alt="?" src={image} />
