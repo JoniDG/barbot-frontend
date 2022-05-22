@@ -1,4 +1,4 @@
-import { Button, Toolbar, Typography, Box, Container, Link } from '@mui/material'
+import { Button, Toolbar, Typography, Box, Container} from '@mui/material'
 import React from 'react'
 import AppBar from '@mui/material/AppBar';
 import LiquorIcon from '@mui/icons-material/Liquor';
@@ -24,7 +24,7 @@ const navigate = useNavigate();
       <AppBar position="static">
           <Container maxWidth='x1'>
             <Toolbar disableGutters>
-                <Link href='/' color="inherit" underline="none" display='flex' sx={{alignItems:"center"}} onClick={()=>navigate('/')}>
+                <Button key="home" disableRipple={true} color="inherit" underline="none" display='flex' sx={{alignItems:"center"}} onClick={()=>navigate("/")}>
                     <LiquorIcon sx={{display:{xs: 'none', md:'flex'}, mr:1}} fontSize="large"/>
                     <Typography
                         variant="h6"
@@ -41,7 +41,7 @@ const navigate = useNavigate();
                     >
                     APPBAR
                     </Typography>
-                </Link>
+                </Button>
                 
                 <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
                 {

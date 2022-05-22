@@ -1,7 +1,11 @@
 import React from 'react'
+import { NavBar } from './NavBar'
 
 export const Help = () => {
   return (
-    <h1>Esto es la ayuda</h1>
+    <>
+      <NavBar/>
+      <h1>Esto es la ayuda</h1>
+    </>
   )
 }

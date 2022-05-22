@@ -1,5 +1,6 @@
 import React from 'react'
 import { MixedDrinksList } from '../components/MixedDrinksList';
+import { NavBar } from '../components/NavBar';
 import { avatarFernetCoca } from '../data/avatars';
 
 // MixedDrinksRepository
@@ -18,7 +19,7 @@ class MixedDrinksAPI {
 						"percent":30
 					},
 					{
-						"name":"Coca",
+						"name":"Coca Cola",
 						"percent":70
 					}
 				]
@@ -28,11 +29,11 @@ class MixedDrinksAPI {
 				"image": avatarFernetCoca,
 				"drinks": [
 					{
-						"name":"Agua Gasificada",
+						"name":"Agua con gas",
 						"percent": 57
 					},
 					{
-						"name":"Jugo de Limon",
+						"name":"Jugo de limón",
 						"percent": 14
 					},
           {
@@ -50,7 +51,7 @@ class MixedDrinksAPI {
 						"percent": 20
 					},
 					{
-						"name":"Agua Tonica",
+						"name":"Agua tónica",
 						"percent": 80
 					}
 				]
@@ -73,14 +74,18 @@ class MixedDrinksAPI {
 	}
 }
 
+
 export const Home = () => {
 	const mixedDrinksAPI = new MixedDrinksAPI(null);
-
 	const mixedDrinks = mixedDrinksAPI.getAll();
+
 	return (
+		<>
+		<NavBar/>
 		<div style={{justifyContent: 'center'}}>
 			<MixedDrinksList mixedDrinks={mixedDrinks}/>
 		</div>
+		</>
 	)
 }
 

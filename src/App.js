@@ -1,7 +1,8 @@
+import { AuthContext } from "./auth/AuthContext";
 import { AppRoutes } from "./routes/AppRoutes";
 
 function App() {
-
+  let user = JSON.parse(localStorage.getItem('user'));
   return (
     
     <div className="App">
@@ -15,7 +16,11 @@ function App() {
         href="https://fonts.googleapis.com/icon?family=Material+Icons"
       />
       </header>
-      <AppRoutes/>
+      <AuthContext.Provider
+        value={user}
+      >
+        <AppRoutes/>
+      </AuthContext.Provider>
     </div>
   );
 }
