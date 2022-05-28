@@ -20,11 +20,16 @@ const opc = [
 ];
 
 const navigate = useNavigate();
+
+const handleLogout = ()=>{
+    localStorage.removeItem("token");
+    navigate("/login");
+}
   return (
       <AppBar position="static">
           <Container maxWidth='x1'>
             <Toolbar disableGutters>
-                <Button key="home" disableRipple={true} color="inherit" underline="none" display='flex' sx={{alignItems:"center"}} onClick={()=>navigate("/")}>
+                <Button key="home" disableRipple={true} color="inherit" underline="none" display='flex' sx={{alignItems:"center", "&:hover": {backgroundColor: "transparent"}}} onClick={()=>navigate("/")}>
                     <LiquorIcon sx={{display:{xs: 'none', md:'flex'}, mr:1}} fontSize="large"/>
                     <Typography
                         variant="h6"
@@ -51,13 +56,14 @@ const navigate = useNavigate();
                             key={item.name} 
                             onClick= {()=>navigate(item.url)}
                             sx={{color:'white',my:'2', display:'block'}}
-                        >    
+                        >
                             {item.name}
                         </Button>
                     )
                     })
                 }
                 </Box>
+                <Button onClick={handleLogout} sx={{color:'white',my:'2', display:'block'}}>Cerrar sesion</Button>
             </Toolbar>
           </Container>        
       </AppBar>

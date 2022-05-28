@@ -1,16 +1,23 @@
 import React from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import { Config } from '../components/Config'
-import { Help } from '../components/Help'
-import { Login } from '../components/Login'
-import { Home } from '../views/Home'
+import { Home } from '../views/Home';
+import { Config } from '../views/Config'
+import { Register } from '../views/Register';
+import { Login } from '../views/Login';
+import { Help } from '../views/Help';
+
 import { ProtectedRoutes } from './ProtectedRoutes'
 
 export const AppRoutes = () => {
   return (
     <BrowserRouter>
         <Routes>
-
+            <Route
+                path="/login" element={<Login/>}
+            />
+            <Route
+                path="/register" element={<Register/>}
+            />
             <Route 
             path="*" 
             element={
@@ -25,12 +32,12 @@ export const AppRoutes = () => {
                         <Route
                             path="/help" element={<Help/>}
                         />
+                        <Route
+                            path="*" element={<h1>NOT FOUND</h1>}
+                        />
                     </Routes>
                 </ProtectedRoutes>
             }
-            />
-            <Route
-                path="/login" element={<Login/>}
             />
         </Routes>
       </BrowserRouter>

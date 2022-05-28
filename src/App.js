@@ -2,7 +2,7 @@ import { AuthContext } from "./auth/AuthContext";
 import { AppRoutes } from "./routes/AppRoutes";
 
 function App() {
-  let user = JSON.parse(localStorage.getItem('user'));
+  let token = localStorage.getItem('token');
   return (
     
     <div className="App">
@@ -17,7 +17,7 @@ function App() {
       />
       </header>
       <AuthContext.Provider
-        value={user}
+        value={token}
       >
         <AppRoutes/>
       </AuthContext.Provider>

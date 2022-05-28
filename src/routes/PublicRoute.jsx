@@ -6,7 +6,7 @@ export const PublicRoute = ({children}) => {
     const user = useContext(AuthContext);
     if(user!==null){
       return <Navigate
-      to={'/home'}
+      to={'/'}
       />
     }else{
       return children;

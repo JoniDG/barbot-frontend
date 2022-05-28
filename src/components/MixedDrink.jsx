@@ -5,7 +5,7 @@ import ListItemText from '@mui/material/ListItemText';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
 import Avatar from '@mui/material/Avatar';
 
-export const MixedDrink = ({image,name,drinks,disabled}) => {
+export const MixedDrink = ({img,name,drinks,disabled}) => {
 	let drinksString = "";
 	drinks.forEach((item)=>{
 		drinksString += item.name + ", ";
@@ -15,7 +15,7 @@ export const MixedDrink = ({image,name,drinks,disabled}) => {
 		<ListItem alignItems="flex-start" divider= {true}>
 			<ListItemButton disabled={disabled} onClick={() => {alert(`Preparando ${name}`);}}>
 				<ListItemAvatar>
-					<Avatar alt="?" src={image} />
+					<Avatar alt="?" src={img} />
 				</ListItemAvatar>
 				<ListItemText
 					primary={name}

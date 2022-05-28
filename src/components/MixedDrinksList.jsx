@@ -8,7 +8,7 @@ const isAvailable = (selectedDrinks, drinks)=>{
 	}
 	for (let i = 0; i < drinks.length; i++) {
 		const drink = drinks[i];
-		const exists = selectedDrinks.filter(selectedDrink=>selectedDrink===drink.name);
+		const exists = selectedDrinks.filter(selectedDrink=>selectedDrink.id===drink.id);
 		if(exists.length===0){
 			return false
 		}
@@ -21,15 +21,32 @@ export const MixedDrinksList = ({mixedDrinks}) => {
 	if(selectedDrinks!==null){
 		selectedDrinks=JSON.parse(selectedDrinks);
 	}
+
+	let availableMixedDrinks = [];
+	let notAvailableMixedDrinks = [];
+
+	for(let i=0; i<mixedDrinks.length; i++){
+		const md = mixedDrinks[i]
+		if(isAvailable(selectedDrinks, md.drinks)){
+			availableMixedDrinks.push(<MixedDrink key={md.name} img={md.img} name={md.name} drinks={md.drinks}/>)
+		} else {
+			notAvailableMixedDrinks.push(<MixedDrink key={md.name} img={md.img} name={md.name} drinks={md.drinks} disabled={true}/>)
+		}
+	}
+
 	return (
 		<List sx={{
 			maxWidth: 800,
 			margin: '0 auto'
     	}}>
 		{
-			mixedDrinks.map((item)=>{
-				const disabled = !isAvailable(selectedDrinks,item.drinks);
-				return <MixedDrink key={item.name} image={item.image} name={item.name} drinks={item.drinks} disabled={disabled}/>
+			availableMixedDrinks.map((mixedDrink)=>{
+				return mixedDrink
+			})
+		}
+		{	
+			notAvailableMixedDrinks.map((mixedDrink)=>{
+				return mixedDrink
 			})
 		}  
 		</List>

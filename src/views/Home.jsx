@@ -1,92 +1,72 @@
-import React from 'react'
+import { Alert, Backdrop, CircularProgress, Snackbar } from '@mui/material';
+import React, { useEffect, useState } from 'react'
 import { MixedDrinksList } from '../components/MixedDrinksList';
 import { NavBar } from '../components/NavBar';
-import { avatarFernetCoca } from '../data/avatars';
-
-// MixedDrinksRepository
-class MixedDrinksAPI {
-	constructor(baseURL){
-		this.baseURL = baseURL;
-	}
-	getAll() {
-		return [
-			{
-				"name": "Fernet Cola",
-				"image": avatarFernetCoca,
-				"drinks": [
-					{
-						"name":"Fernet",
-						"percent":30
-					},
-					{
-						"name":"Coca Cola",
-						"percent":70
-					}
-				]
-			},
-			{
-				"name": "Mojito",
-				"image": avatarFernetCoca,
-				"drinks": [
-					{
-						"name":"Agua con gas",
-						"percent": 57
-					},
-					{
-						"name":"Jugo de limón",
-						"percent": 14
-					},
-          {
-						"name":"Ron",
-						"percent": 29
-					},
-				]
-			},
-			{
-				"name": "Gin Tonic",
-				"image": avatarFernetCoca,
-				"drinks": [
-					{
-						"name":"Ginebra",
-						"percent": 20
-					},
-					{
-						"name":"Agua tónica",
-						"percent": 80
-					}
-				]
-			},
-      {
-				"name": "Martini",
-				"image": avatarFernetCoca,
-				"drinks": [
-					{
-						"name":"Ginebra",
-						"percent": 83
-					},
-					{
-						"name":"Vermut",
-						"percent": 17
-					}
-				]
-			}
-		]
-	}
-}
-
+import { getMixedDrinks } from '../services/mixedDrinksService';
 
 export const Home = () => {
-	const mixedDrinksAPI = new MixedDrinksAPI(null);
-	const mixedDrinks = mixedDrinksAPI.getAll();
+	const [responseError, setResponseError] = useState(null);
+    const [loading, setLoading] = useState(true);
+	const [mixedDrinks, setMixedDrinks] = useState(null);
 
+	useEffect(() => {
+		getMixedDrinks()
+        .then(response => {
+            setLoading(false);
+			setMixedDrinks(response);
+        })
+        .catch(error => {
+            setResponseError(error.message);
+            setLoading(false)
+        })
+	}, [])
+	
 	return (
-		<>
-		<NavBar/>
-		<div style={{justifyContent: 'center'}}>
-			<MixedDrinksList mixedDrinks={mixedDrinks}/>
-		</div>
+		<>	
+			{responseError?
+				<Snackbar open={true}>
+					<Alert severity="error" sx={{ width: '100%' }}>
+					{responseError}
+					</Alert>
+				</Snackbar>
+				:null}
+			{loading? 
+                <Backdrop
+                    sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+                    open={true}
+                >
+                    <CircularProgress color="inherit" />
+                </Backdrop> 
+            	:null}
+			<NavBar/>
+			<div style={{justifyContent: 'center'}}>
+			{mixedDrinks?<MixedDrinksList mixedDrinks={mixedDrinks}/>:null}
+			</div>
 		</>
 	)
+	/* return (
+		<>
+		{
+			loading?(
+				<Backdrop
+                    sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+                    open={true}
+                >
+                    <CircularProgress color="inherit" />
+                </Backdrop> 
+			) : error ? (
+				<Alert severity="error">Ocurrio un error al mostrar sus bebidas</Alert>
+			) : (
+				<>
+					<NavBar/>
+					<div style={{justifyContent: 'center'}}>
+					<MixedDrinksList mixedDrinks={mixedDrinks}/>
+					</div>
+				</>
+			)
+		}
+		</>
+	) */
 }
 
 
